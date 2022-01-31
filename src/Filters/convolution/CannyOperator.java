@@ -9,7 +9,7 @@ public class CannyOperator {
         DImage d = new DImage(canny[0].length, canny.length);
         d.setPixels(canny);
         Sobel sobel = new Sobel();
-        var v = sobel.processImage(d).getBWPixelGrid();
+        short[][] v = sobel.processImage(d).getBWPixelGrid();
         return v;
     }
 

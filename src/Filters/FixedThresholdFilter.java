@@ -1,7 +1,8 @@
 package Filters;
 
-import Interfaces.PixelFilter;
+
 import core.DImage;
+import Interfaces.PixelFilter;
 
 public class FixedThresholdFilter implements PixelFilter {
     private int threshold;
@@ -27,5 +28,6 @@ public class FixedThresholdFilter implements PixelFilter {
         img.setPixels(grid);
         return img;
     }
+
 }
 
