@@ -8,7 +8,11 @@ import java.util.Arrays;
 
 public class BoxBlur extends Convolution {
     int N;
+    public BoxBlur(int N ){
+       this.N = N;
 
+        if (this.N % 2 == 0) this.N++;
+    }
     public BoxBlur() {
         this.N = Integer.parseInt(JOptionPane.showInputDialog("Select an odd number (kernel size)"));
         //if it is even then we need to increment by 1

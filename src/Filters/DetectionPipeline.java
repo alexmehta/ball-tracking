@@ -1,6 +1,9 @@
 package Filters;
 
+import Filters.convolution.BoxBlur;
 import Filters.convolution.Convolution;
+import Filters.convolution.Emboss;
+import Filters.convolution.Sobel;
 import Interfaces.PixelFilter;
 import core.DImage;
 
@@ -9,8 +12,11 @@ import java.util.ArrayList;
 public class DetectionPipeline implements PixelFilter {
     ArrayList<Convolution> filters;
 
-    public DetectionPipeline(ArrayList<Convolution> filters) {
-       this.filters = filters;
+    public DetectionPipeline() {
+        filters = new ArrayList<>();
+        filters.add(new BoxBlur(3));
+        filters.add(new Emboss());
+        filters.add(new Sobel());
     }
 
     @Override
