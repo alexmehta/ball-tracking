@@ -1,9 +1,6 @@
 package Filters;
 
-import Filters.convolution.BoxBlur;
-import Filters.convolution.Convolution;
-import Filters.convolution.Emboss;
-import Filters.convolution.Sobel;
+import Filters.convolution.*;
 import Interfaces.PixelFilter;
 import core.DImage;
 
@@ -15,7 +12,7 @@ public class DetectionPipeline implements PixelFilter {
     public DetectionPipeline() {
         filters = new ArrayList<>();
         filters.add(new BoxBlur(3));
-        filters.add(new Emboss());
+        filters.add(new ColorMask());
         filters.add(new Sobel());
     }
 

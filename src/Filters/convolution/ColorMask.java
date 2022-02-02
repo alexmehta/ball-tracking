@@ -6,20 +6,20 @@ import javax.swing.*;
 
 public class ColorMask extends Convolution {
     //threshold -> 10%
-    final double THRESHOLD = 44;
+    final double THRESHOLD = 150;
     final int BLACK = 0;
     final int WHITE = 255;
-    int red;
-    int green;
-    int blue;
+    int red = 255;
+    int green=0;
+    int blue=0;
 
     public ColorMask() {
-        String r = JOptionPane.showInputDialog("Enter red(0-255): ");
-        String g = JOptionPane.showInputDialog("Enter Green(0-255): ");
-        String b = JOptionPane.showInputDialog("Enter Blue(0-255): ");
-        this.red = Integer.parseInt(r);
-        this.green = Integer.parseInt(g);
-        this.blue = Integer.parseInt(b);
+//        String r = JOptionPane.showInputDialog("Enter red(0-255): ");
+//        String g = JOptionPane.showInputDialog("Enter Green(0-255): ");
+//        String b = JOptionPane.showInputDialog("Enter Blue(0-255): ");
+//        this.red = Integer.parseInt(r);
+//        this.green = Integer.parseInt(g);
+//        this.blue = Integer.parseInt(b);
     }
 
     public double distanceTo(int r, int g, int b, int otherR, int otherG, int otherB) {
