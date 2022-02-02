@@ -19,6 +19,7 @@ public class DetectionPipeline implements PixelFilter {
     @Override
     public DImage processImage(DImage img) throws Exception {
         img = applyFilters(img);
+        img = FindCenter.count(img);
         return img;
     }
 
