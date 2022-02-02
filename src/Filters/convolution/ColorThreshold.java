@@ -24,7 +24,7 @@ public class ColorThreshold extends Convolution {
                 double cmax = Math.max(red, Math.max(green, blue));
                 double cmin = Math.min(red, Math.min(green, blue));
                 double diff = cmax - cmin;
-                double h = -1, s = -1;
+                double h = -1, s;
                 if (cmax == cmin) h = 0;
                 else if (cmax == r[i][j])
                     h = (60 * ((g[i][j] - b[i][j]) / diff) + 360) % 360;
