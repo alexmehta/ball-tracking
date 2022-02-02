@@ -13,6 +13,7 @@ public class ColorThreshold extends Convolution {
         return img;
     }
 
+    //alg for HSV threshold converting RGB to HSV
     private HSV[][] getHSVvals(short[][] r, short[][] g, short[][] b) {
         HSV[][] gr = new HSV[r.length][r[0].length];
         for (int i = 0; i < r.length; i++) {
