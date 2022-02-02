@@ -2,12 +2,16 @@ package Filters;
 
 import Filters.convolution.*;
 import Interfaces.PixelFilter;
+import Utility.Pair;
 import core.DImage;
 
 import java.util.ArrayList;
 
 public class DetectionPipeline implements PixelFilter {
+
+    private static final int PRINTSIZE = 100;
     ArrayList<Convolution> filters;
+    ArrayList<Pair<Integer,Integer>> pairs = new ArrayList<>();
 
     public DetectionPipeline() {
         filters = new ArrayList<>();
@@ -19,7 +23,10 @@ public class DetectionPipeline implements PixelFilter {
     @Override
     public DImage processImage(DImage img) throws Exception {
         img = applyFilters(img);
-        img = FindCenter.count(img);
+        pairs.add(FindCenter.count(img));
+        if (pairs.size()>=PRINTSIZE){
+
+        }
         return img;
     }
 
