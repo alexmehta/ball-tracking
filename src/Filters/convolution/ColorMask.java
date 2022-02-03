@@ -39,7 +39,10 @@ public class ColorMask extends Convolution {
         short[][] blue = img.getBlueChannel();
         for (int r = 0; r < red.length; r++) {
             for (int c = 0; c < red[r].length; c++) {
-                if (distanceTo(this.red, this.green, this.blue, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD) {
+              boolean  isRed =  distanceTo(255,0,0, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
+              boolean  isBlue =  distanceTo(0,0,255, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
+              boolean  isGreen =  distanceTo(0,255,0, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
+                if (isRed || isGreen || isBlue) {
                     red[r][c] = WHITE;
                     green[r][c] = WHITE;
                     blue[r][c] = WHITE;
