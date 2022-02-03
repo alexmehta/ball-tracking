@@ -13,6 +13,13 @@ public class Kluster {
         this.pairs = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        return "Kluster{" +
+                "center=" + center +
+                '}';
+    }
+
     public Pair<Integer, Integer> getCenter() {
         return center;
     }

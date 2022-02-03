@@ -30,9 +30,11 @@ public class DetectionPipeline implements PixelFilter {
         img = applyFilters(img);
         pairs.add(FindCenter.count(img));
         System.out.println(pairs.get(pairs.size() - 1));
-        Klustering k = new Klustering(1, img.getBWPixelGrid());
+        Klustering k = new Klustering(3, img.getBWPixelGrid());
+
         k.kluster();
         Serializer.printAll(k.getClusters());
+        System.err.println(k.getClusters());
         return img;
     }
 
