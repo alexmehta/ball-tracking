@@ -1,14 +1,15 @@
 package Filters.convolution;
 
+import Interfaces.Interactive;
 import core.DImage;
 
 import javax.swing.*;
 
-public class ColorMask extends Convolution {
+public class ColorMask extends Convolution implements Interactive {
     //threshold -> 10%
 
     //(255- 110  + , 66 + , 62) distance
-    final double THRESHOLD = 150;
+     double THRESHOLD = 150;
     final int BLACK = 0;
     final int WHITE = 255;
     final int red = 255;
@@ -55,6 +56,27 @@ public class ColorMask extends Convolution {
         }
         img.setColorChannels(red, green, blue);
         return img;
+    }
+
+    @Override
+    public void mouseClicked(int mouseX, int mouseY, DImage img) {
+        short[][] pixels = img.getBWPixelGrid();
+        short val = pixels[mouseY][mouseX];
+
+        System.out.printf("Value at: %d %d is %d%n", mouseX, mouseY, val);
+    }
+
+    @Override
+    public void keyPressed(char key) {
+        System.out.println();
+        if (key == '+') {
+            THRESHOLD += 10;
+        } else if (key == '-') {
+            THRESHOLD -= 10;
+        }
+        System.out.println("key pressed was: " + key);
+        System.out.println("new threshold is: " + THRESHOLD);
+
     }
 }
 
