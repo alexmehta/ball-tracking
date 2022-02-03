@@ -1,5 +1,4 @@
 package Utility;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -27,14 +26,14 @@ public class Serializer {
 
     public static void printAll(ArrayList<Pair<Integer, Integer>> pairs) throws FileNotFoundException {
         for (Pair<Integer, Integer> pair : pairs) {
-            fout.println(getTime() + ", " + pair);
+            fout.println(getTime() + pair.toString());
 
         }
         fout.close();
     }
 
     public static void print(Pair<Integer, Integer> pair) {
-        fout.println(getTime() + ", " + pair);
+        fout.println(getTime() + pair.toString());
         fout.close();
     }
 }
