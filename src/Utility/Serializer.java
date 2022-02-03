@@ -1,4 +1,7 @@
 package Utility;
+
+import Filters.convolution.clustering.Kluster;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -24,10 +27,16 @@ public class Serializer {
         return new Date().getTime();
     }
 
-    public static void printAll(ArrayList<Pair<Integer, Integer>> pairs) throws FileNotFoundException {
-        for (Pair<Integer, Integer> pair : pairs) {
-            fout.println(getTime() + pair.toString());
+//    public static void printAll(ArrayList<Pair<Integer, Integer>> pairs) throws FileNotFoundException {
+//        for (Pair<Integer, Integer> pair : pairs) {
+//            print(pair);
+//        }
+//        fout.close();
+//    }
 
+    public static void printAll(ArrayList<Kluster> clusters) throws FileNotFoundException {
+        for (Kluster cluster : clusters) {
+            print(cluster.getCenter());
         }
         fout.close();
     }

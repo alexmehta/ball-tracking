@@ -4,6 +4,7 @@ import Filters.convolution.BoxBlur;
 import Filters.convolution.ColorMask;
 import Filters.convolution.Convolution;
 import Filters.convolution.FindCenter;
+import Filters.convolution.clustering.Klustering;
 import Interfaces.PixelFilter;
 import Utility.Pair;
 import Utility.Serializer;
@@ -29,11 +30,9 @@ public class DetectionPipeline implements PixelFilter {
         img = applyFilters(img);
         pairs.add(FindCenter.count(img));
         System.out.println(pairs.get(pairs.size() - 1));
-        if (pairs.size() == PRINTSIZE) {
-            Serializer.printAll(pairs);
-        } else if (pairs.size() > PRINTSIZE) {
-            Serializer.print(pairs.get(pairs.size() - 1));
-        }
+        Klustering k = new Klustering(1, img.getBWPixelGrid());
+        k.kluster();
+        Serializer.printAll(k.getClusters());
         return img;
     }
 
