@@ -20,8 +20,8 @@ public class FindCenter extends Convolution {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (grid[i][j] == 0){
-                    pair.setSecond(pair.getSecond()+j);
-                    pair.setFirst(pair.getFirst()+i);
+                    pair.setSecond(pair.getSecond()+i);
+                    pair.setFirst(pair.getFirst()+j);
                     count++;
                 }
 

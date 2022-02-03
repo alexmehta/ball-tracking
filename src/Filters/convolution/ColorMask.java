@@ -6,6 +6,8 @@ import javax.swing.*;
 
 public class ColorMask extends Convolution {
     //threshold -> 10%
+
+    //(255- 110  + , 66 + , 62) distance
     final double THRESHOLD = 150;
     final int BLACK = 0;
     final int WHITE = 255;

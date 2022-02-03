@@ -12,6 +12,4 @@ public class CannyOperator {
         short[][] v = sobel.processImage(d).getBWPixelGrid();
         return v;
     }
-
-
 }
