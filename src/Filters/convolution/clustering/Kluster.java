@@ -27,7 +27,7 @@ public class Kluster {
     public void setCenter(Pair<Integer, Integer> center) {
         this.center = center;
     }
-
+    //points
     public ArrayList<Pair<Integer, Integer>> getPairs() {
         return pairs;
     }
