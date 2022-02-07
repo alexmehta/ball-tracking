@@ -18,7 +18,6 @@ public class FindCenter extends Convolution {
         width = img.getWidth();
         short[][] grid = img.getBWPixelGrid();
         int count = 0;
-        img.getBWPixelGrid();
         Point<Integer, Integer> pair = new Point<>(0, 0);
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

@@ -4,7 +4,7 @@ import Filters.convolution.BoxBlur;
 import Filters.convolution.ColorMask;
 import Filters.convolution.Convolution;
 import Filters.convolution.FindCenter;
-import Filters.convolution.clustering.ClusterDebug;
+import Filters.convolution.clustering.ColorKluster;
 import Filters.convolution.clustering.Klustering;
 import Interfaces.Interactive;
 import Interfaces.PixelFilter;
@@ -35,7 +35,7 @@ public class DetectionPipeline implements PixelFilter, Interactive {
         k.kluster();
         Serializer.printAll(k.getClusters());
         System.err.println(k.getClusters());
-        ClusterDebug c = new ClusterDebug(k.getClusters());
+        ColorKluster c = new ColorKluster(k.getClusters());
         img = c.processImage(img);
         return img;
     }
