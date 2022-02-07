@@ -29,8 +29,8 @@ public class Serializer {
         }
     }
 
-    public static void print(Pair<Integer, Integer> pair) {
-        fout.println(getTime() + ", " + pair.getY() + ", " + pair.getX());
+    public static void print(Point<Integer, Integer> pair) {
+        fout.println(getTime() + ", " + pair.getyCord() + ", " + pair.getxCord());
         fout.flush();
     }
 }

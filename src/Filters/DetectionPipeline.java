@@ -8,7 +8,7 @@ import Filters.convolution.clustering.ClusterDebug;
 import Filters.convolution.clustering.Klustering;
 import Interfaces.Interactive;
 import Interfaces.PixelFilter;
-import Utility.Pair;
+import Utility.Point;
 import Utility.Serializer;
 import core.DImage;
 
@@ -18,7 +18,7 @@ public class DetectionPipeline implements PixelFilter, Interactive {
 
     private static final int PRINTSIZE = 100;
     ArrayList<Convolution> filters;
-    ArrayList<Pair<Integer, Integer>> pairs = new ArrayList<>();
+    ArrayList<Point<Integer, Integer>> pairs = new ArrayList<>();
 
     public DetectionPipeline() {
         filters = new ArrayList<>();

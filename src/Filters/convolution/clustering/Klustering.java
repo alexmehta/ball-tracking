@@ -1,7 +1,7 @@
 package Filters.convolution.clustering;
 
 import Filters.convolution.FindCenter;
-import Utility.Pair;
+import Utility.Point;
 import Utility.Utility;
 
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import java.util.Collections;
 public class Klustering {
     int kP;
     ArrayList<Kluster> clusters;
-    ArrayList<Pair<Integer, Integer>> targets;
-    ArrayList<Pair<Integer, Integer>> prev = new ArrayList<Pair<Integer, Integer>>();
+    ArrayList<Point<Integer, Integer>> targets;
+    ArrayList<Point<Integer, Integer>> prev = new ArrayList<Point<Integer, Integer>>();
     boolean done = true;
 
     public Klustering(int kP, short[][] image) {
@@ -42,19 +42,19 @@ public class Klustering {
         this.clusters = clusters;
     }
 
-    public ArrayList<Pair<Integer, Integer>> getTargets() {
+    public ArrayList<Point<Integer, Integer>> getTargets() {
         return targets;
     }
 
-    public void setTargets(ArrayList<Pair<Integer, Integer>> targets) {
+    public void setTargets(ArrayList<Point<Integer, Integer>> targets) {
         this.targets = targets;
     }
 
-    public ArrayList<Pair<Integer, Integer>> getPrev() {
+    public ArrayList<Point<Integer, Integer>> getPrev() {
         return prev;
     }
 
-    public void setPrev(ArrayList<Pair<Integer, Integer>> prev) {
+    public void setPrev(ArrayList<Point<Integer, Integer>> prev) {
         this.prev = prev;
     }
 
@@ -78,18 +78,18 @@ public class Klustering {
     private void centerKlusters() {
         for (Kluster cluster : clusters) {
             prev.add(cluster.center);
-            Pair<Integer, Integer> newcenter = FindCenter.count(cluster.pairs);
+            Point<Integer, Integer> newcenter = FindCenter.count(cluster.pairs);
             if (newcenter.equals(cluster.center)) done = false;
             cluster.center = FindCenter.count(cluster.pairs);
         }
     }
 
-    private void assignPoints(ArrayList<Pair<Integer, Integer>> targets) {
-        for (Pair<Integer, Integer> target : targets) {
+    private void assignPoints(ArrayList<Point<Integer, Integer>> targets) {
+        for (Point<Integer, Integer> target : targets) {
             double smallest = Double.MAX_VALUE;
             int smallestidx = -1;
             for (int i = 0; i < clusters.size(); i++) {
-                double dist = Utility.distanceTo(target.getY(), target.getX(), 0, clusters.get(i).center.getY(), clusters.get(i).center.getX(), 0);
+                double dist = Utility.distanceTo(target.getyCord(), target.getxCord(), 0, clusters.get(i).center.getyCord(), clusters.get(i).center.getxCord(), 0);
                 if (dist < smallest) {
                     smallestidx = i;
                     smallest = dist;
@@ -106,13 +106,13 @@ public class Klustering {
         prev.clear();
     }
 
-    private ArrayList<Pair<Integer, Integer>> getWhites(short[][] image) {
-        ArrayList<Pair<Integer, Integer>> c = new ArrayList<>();
+    private ArrayList<Point<Integer, Integer>> getWhites(short[][] image) {
+        ArrayList<Point<Integer, Integer>> c = new ArrayList<>();
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < image[i].length; j++) {
                 short v = image[i][j];
                 if (v != 255) continue;
-                c.add(new Pair<>(i, j));
+                c.add(new Point<>(i, j));
             }
         }
         return c;
