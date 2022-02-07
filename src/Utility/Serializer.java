@@ -19,30 +19,18 @@ public class Serializer {
             e.printStackTrace();
         }
     }
-
-    public Serializer() throws FileNotFoundException {
-    }
-
     static long getTime() {
         return new Date().getTime();
     }
-
-//    public static void printAll(ArrayList<Pair<Integer, Integer>> pairs) throws FileNotFoundException {
-//        for (Pair<Integer, Integer> pair : pairs) {
-//            print(pair);
-//        }
-//        fout.close();
-//    }
-
-    public static void printAll(ArrayList<Kluster> clusters) throws FileNotFoundException {
+    public static void printAll(ArrayList<Kluster> clusters) {
         for (Kluster cluster : clusters) {
             print(cluster.getCenter());
+            System.out.println(cluster.getCenter());
         }
-        fout.close();
     }
 
     public static void print(Pair<Integer, Integer> pair) {
-        fout.println(getTime() + pair.toString());
-        fout.close();
+        fout.println(getTime() + ", " + pair.getFirst() + ", " + pair.getSecond());
+        fout.flush();
     }
 }
