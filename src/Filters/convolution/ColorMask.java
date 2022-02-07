@@ -8,16 +8,9 @@ public class ColorMask extends Convolution {
     private final int red = 255;
     private final int green = 0;
     private final int blue = 0;
-    private double THRESHOLD = 150;
-
+    private double THRESHOLD = 200;
     public ColorMask() {
-//        String r = JOptionPane.showInputDialog("Enter red(0-255): ");
-//        String g = JOptionPane.showInputDialog("Enter Green(0-255): ");
-//        String b = JOptionPane.showInputDialog("Enter Blue(0-255): ");
-//        this.red = Integer.parseInt(r);
-//        this.green = Integer.parseInt(g);
-//        this.blue = Integer.parseInt(b);
-    }
+   }
 
     public double getTHRESHOLD() {
         return THRESHOLD;

@@ -19,6 +19,7 @@ public class Klustering {
         clusters = new ArrayList<>();
         targets = getWhites(image);
         for (int i = 0; i < kP; i++) {
+            if (targets.size()==0) break;
             Collections.shuffle(targets);
             clusters.add(new Kluster(targets.get(0)));
             targets.remove(0);

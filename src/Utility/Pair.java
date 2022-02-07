@@ -1,7 +1,5 @@
 package Utility;
 
-import java.util.Objects;
-
 public class Pair<K, V> {
     K first;
     V second;
@@ -9,6 +7,12 @@ public class Pair<K, V> {
     public Pair(K first, V second) {
         this.first = first;
         this.second = second;
+    }
+
+    public static void swap(Pair p) {
+        var temp = p.first;
+        p.first = p.second;
+        p.second = temp;
     }
 
 

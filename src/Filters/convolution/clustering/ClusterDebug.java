@@ -28,6 +28,7 @@ public class ClusterDebug extends Convolution{
 
         for (int i = 0; i <k.getPairs().size() ; i++) {
             Pair p = k.getPairs().get(i);
+            Pair.swap(p);
             if (gird[(int) p.getSecond()][(int) p.getFirst()]==255){
                 red[(int) p.getSecond()][(int)p.getFirst()] = (short) r;
                 green[(int) p.getSecond()][(int)p.getFirst()] = (short) g;
