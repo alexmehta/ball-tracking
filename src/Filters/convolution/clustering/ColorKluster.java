@@ -26,10 +26,10 @@ public class ColorKluster extends Convolution {
         for (int i = 0; i < k.getPairs().size(); i++) {
             Point p = k.getPairs().get(i);
             Point.swap(p);
-            if (gird[(int) p.getxCord()][(int) p.getyCord()] == WHITE) {
-                red[(int) p.getxCord()][(int) p.getyCord()] = (short) r;
-                green[(int) p.getxCord()][(int) p.getyCord()] = (short) g;
-                blue[(int) p.getxCord()][(int) p.getyCord()] = (short) b;
+            if (gird[(int) p.getX()][(int) p.getY()] == WHITE) {
+                red[(int) p.getX()][(int) p.getY()] = (short) r;
+                green[(int) p.getX()][(int) p.getY()] = (short) g;
+                blue[(int) p.getX()][(int) p.getY()] = (short) b;
 
 
             }

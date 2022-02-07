@@ -30,7 +30,7 @@ public class Serializer {
     }
 
     public static void print(Point<Integer, Integer> pair) {
-        fout.println(getTime() + ", " + pair.getyCord() + ", " + pair.getxCord());
+        fout.println(getTime() + ", " + pair.getY() + ", " + pair.getX());
         fout.flush();
     }
 }

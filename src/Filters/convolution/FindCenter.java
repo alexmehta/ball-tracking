@@ -22,15 +22,15 @@ public class FindCenter extends Convolution {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (grid[i][j] == 0) {
-                    pair.setxCord(pair.getxCord() + i);
-                    pair.setyCord(pair.getyCord() + j);
+                    pair.setX(pair.getX() + i);
+                    pair.setY(pair.getY() + j);
                     count++;
                 }
 
             }
         }
-        pair.setyCord(pair.getyCord() / count);
-        pair.setxCord(pair.getxCord() / count);
+        pair.setY(pair.getY() / count);
+        pair.setX(pair.getX() / count);
 
         return pair;
     }
@@ -42,15 +42,15 @@ public class FindCenter extends Convolution {
         //return center use k means cluster
         Point<Integer, Integer> avg = new Point<>(0, 0);
         for (int i = 0; i < size; i++) {
-            sumX +=points.get(i).getyCord();
-            sumY +=points.get(i).getxCord();
+            sumX +=points.get(i).getY();
+            sumY +=points.get(i).getX();
         }
 
         int xCor = sumX/size;
         int yCor = sumY/size;
 
-        avg.setyCord(xCor);
-        avg.setxCord(yCor);
+        avg.setY(xCor);
+        avg.setX(yCor);
 
         return avg;
 

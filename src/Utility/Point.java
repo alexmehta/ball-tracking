@@ -17,19 +17,19 @@ public class Point<K, V> {
     }
 
 
-    public K getyCord() {
+    public K getY() {
         return yCord;
     }
 
-    public void setyCord(K yCord) {
+    public void setY(K yCord) {
         this.yCord = yCord;
     }
 
-    public V getxCord() {
+    public V getX() {
         return xCord;
     }
 
-    public void setxCord(V xCord) {
+    public void setX(V xCord) {
         this.xCord = xCord;
     }
 
