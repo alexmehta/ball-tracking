@@ -30,7 +30,7 @@ public class Serializer {
     }
 
     public static void print(Pair<Integer, Integer> pair) {
-        fout.println(getTime() + ", " + pair.getFirst() + ", " + pair.getSecond());
+        fout.println(getTime() + ", " + pair.getY() + ", " + pair.getX());
         fout.flush();
     }
 }

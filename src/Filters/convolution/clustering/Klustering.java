@@ -89,7 +89,7 @@ public class Klustering {
             double smallest = Double.MAX_VALUE;
             int smallestidx = -1;
             for (int i = 0; i < clusters.size(); i++) {
-                double dist = Utility.distanceTo(target.getFirst(), target.getSecond(), 0, clusters.get(i).center.getFirst(), clusters.get(i).center.getSecond(), 0);
+                double dist = Utility.distanceTo(target.getY(), target.getX(), 0, clusters.get(i).center.getY(), clusters.get(i).center.getX(), 0);
                 if (dist < smallest) {
                     smallestidx = i;
                     smallest = dist;

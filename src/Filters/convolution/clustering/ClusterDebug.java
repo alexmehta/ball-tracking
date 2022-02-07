@@ -1,11 +1,8 @@
 package Filters.convolution.clustering;
 
 import Filters.convolution.Convolution;
-import Filters.convolution.FindCenter;
 import Utility.Pair;
-import Utility.Serializer;
 import core.DImage;
-import core.DisplayWindow;
 
 import java.util.ArrayList;
 
@@ -29,10 +26,10 @@ public class ClusterDebug extends Convolution{
         for (int i = 0; i <k.getPairs().size() ; i++) {
             Pair p = k.getPairs().get(i);
             Pair.swap(p);
-            if (gird[(int) p.getSecond()][(int) p.getFirst()]==255){
-                red[(int) p.getSecond()][(int)p.getFirst()] = (short) r;
-                green[(int) p.getSecond()][(int)p.getFirst()] = (short) g;
-                blue[(int) p.getSecond()][(int)p.getFirst()] = (short) b;
+            if (gird[(int) p.getX()][(int) p.getY()]==255){
+                red[(int) p.getX()][(int)p.getY()] = (short) r;
+                green[(int) p.getX()][(int)p.getY()] = (short) g;
+                blue[(int) p.getX()][(int)p.getY()] = (short) b;
 
 
             }

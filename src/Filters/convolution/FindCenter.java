@@ -4,7 +4,6 @@ import Utility.Pair;
 import core.DImage;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FindCenter extends Convolution {
     private static int height;
@@ -24,15 +23,15 @@ public class FindCenter extends Convolution {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (grid[i][j] == 0) {
-                    pair.setSecond(pair.getSecond() + i);
-                    pair.setFirst(pair.getFirst() + j);
+                    pair.setX(pair.getX() + i);
+                    pair.setY(pair.getY() + j);
                     count++;
                 }
 
             }
         }
-        pair.setFirst(pair.getFirst() / count);
-        pair.setSecond(pair.getSecond() / count);
+        pair.setY(pair.getY() / count);
+        pair.setX(pair.getX() / count);
 
         return pair;
     }
@@ -44,15 +43,15 @@ public class FindCenter extends Convolution {
         //return center use k means cluster
         Pair<Integer, Integer> avg = new Pair<>(0, 0);
         for (int i = 0; i < size; i++) {
-            sumX +=points.get(i).getFirst();
-            sumY +=points.get(i).getSecond();
+            sumX +=points.get(i).getY();
+            sumY +=points.get(i).getX();
         }
 
         int xCor = sumX/size;
         int yCor = sumY/size;
 
-        avg.setFirst(xCor);
-        avg.setSecond(yCor);
+        avg.setY(xCor);
+        avg.setX(yCor);
 
         return avg;
 

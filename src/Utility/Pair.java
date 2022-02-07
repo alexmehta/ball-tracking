@@ -1,39 +1,39 @@
 package Utility;
 
 public class Pair<K, V> {
-    K first;
-    V second;
+    K y;
+    V x;
 
     public Pair(K first, V second) {
-        this.first = first;
-        this.second = second;
+        this.y = first;
+        this.x = second;
     }
 
     public static void swap(Pair p) {
-        var temp = p.first;
-        p.first = p.second;
-        p.second = temp;
+        Object temp = p.y;
+        p.y = p.x;
+        p.x = temp;
     }
 
 
-    public K getFirst() {
-        return first;
+    public K getY() {
+        return y;
     }
 
-    public void setFirst(K first) {
-        this.first = first;
+    public void setY(K y) {
+        this.y = y;
     }
 
-    public V getSecond() {
-        return second;
+    public V getX() {
+        return x;
     }
 
-    public void setSecond(V second) {
-        this.second = second;
+    public void setX(V x) {
+        this.x = x;
     }
 
     @Override
     public String toString() {
-        return second + ", " + first;
+        return x + ", " + y;
     }
 }
