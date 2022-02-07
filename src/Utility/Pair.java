@@ -30,7 +30,6 @@ public class Pair<K, V> {
 
     @Override
     public String toString() {
-        return ", " + second + ", " + first;
+        return second + ", " + first;
     }
 }
-//110 66 62

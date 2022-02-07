@@ -10,9 +10,23 @@ import java.util.Collections;
 public class Klustering {
     int kP;
     ArrayList<Kluster> clusters;
+    ArrayList<Pair<Integer, Integer>> targets;
+    ArrayList<Pair<Integer, Integer>> prev = new ArrayList<Pair<Integer, Integer>>();
+    boolean done = true;
 
-    public int getkP() {
-        return kP;
+    public Klustering(int kP, short[][] image) {
+        this.kP = kP;
+        clusters = new ArrayList<>();
+        targets = getWhites(image);
+        for (int i = 0; i < kP; i++) {
+            Collections.shuffle(targets);
+            clusters.add(new Kluster(targets.get(0)));
+            targets.remove(0);
+        }
+        targets = getWhites(image);
+    }
+
+    public int getkP() {return kP;
     }
 
     public void setkP(int kP) {
@@ -51,22 +65,6 @@ public class Klustering {
         this.done = done;
     }
 
-    ArrayList<Pair<Integer, Integer>> targets;
-    ArrayList<Pair<Integer, Integer>> prev = new ArrayList<Pair<Integer, Integer>>();
-    boolean done = true;
-
-    public Klustering(int kP, short[][] image) {
-        this.kP = kP;
-        clusters = new ArrayList<>();
-        targets = getWhites(image);
-        for (int i = 0; i < kP; i++) {
-            Collections.shuffle(targets);
-            clusters.add(new Kluster(targets.get(0)));
-            targets.remove(0);
-        }
-        targets = getWhites(image);
-    }
-
     public void kluster() {
         do {
             clearClusters();
@@ -74,7 +72,6 @@ public class Klustering {
             centerKlusters();
         } while (!done);
     }
-
 
 
     private void centerKlusters() {
