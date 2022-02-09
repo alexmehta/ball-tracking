@@ -1,10 +1,15 @@
 package Filters;
 
+<<<<<<< HEAD
 import Filters.convolution.BoxBlur;
 import Filters.convolution.ColorMask;
 import Filters.convolution.Convolution;
 import Filters.convolution.FindCenter;
 import Filters.convolution.clustering.ColorKluster;
+=======
+import Filters.convolution.*;
+import Filters.convolution.clustering.ClusterDebug;
+>>>>>>> 567d0ad78d4aa562c0a6dac0054e934029f40bf4
 import Filters.convolution.clustering.Klustering;
 import Interfaces.Interactive;
 import Interfaces.PixelFilter;
@@ -23,7 +28,8 @@ public class DetectionPipeline implements PixelFilter, Interactive {
     public DetectionPipeline() {
         filters = new ArrayList<>();
         filters.add(new ColorMask());
-        filters.add(new BoxBlur(3));
+//        filters.add(new sevenxsevenGaussianBlur());
+//        filters.add(new BoxBlur(15));
 //        filters.add(new Sobel());
     }
 

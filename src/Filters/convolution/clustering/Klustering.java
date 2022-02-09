@@ -67,25 +67,46 @@ public class Klustering {
     }
 
     public void kluster() {
+        int i = 0;
         do {
             clearClusters();
             assignPoints(targets);
             centerKlusters();
-        } while (!done);
+            i++;
+        } while (i!=20);
     }
 
 
     private void centerKlusters() {
         for (Kluster cluster : clusters) {
             prev.add(cluster.center);
+<<<<<<< HEAD
             Point<Integer, Integer> newcenter = FindCenter.count(cluster.pairs);
+=======
+            Pair<Integer, Integer> newcenter = getAverage(cluster.pairs);
+>>>>>>> 567d0ad78d4aa562c0a6dac0054e934029f40bf4
             if (newcenter.equals(cluster.center)) done = false;
             cluster.center = FindCenter.count(cluster.pairs);
         }
     }
 
+<<<<<<< HEAD
     private void assignPoints(ArrayList<Point<Integer, Integer>> targets) {
         for (Point<Integer, Integer> target : targets) {
+=======
+    private Pair<Integer, Integer> getAverage(ArrayList<Pair<Integer, Integer>> pairs) {
+        Pair<Integer,Integer> avg = new Pair<Integer, Integer>(0,0);
+        for (Pair<Integer, Integer> pair: pairs) {
+                   avg.add(pair);
+        }
+        avg.setFirst(avg.getFirst()/pairs.size());
+        avg.setSecond(avg.getSecond()/pairs.size());
+        return avg;
+    }
+
+    private void assignPoints(ArrayList<Pair<Integer, Integer>> targets) {
+        for (Pair<Integer, Integer> target : targets) {
+>>>>>>> 567d0ad78d4aa562c0a6dac0054e934029f40bf4
             double smallest = Double.MAX_VALUE;
             int smallestidx = -1;
             for (int i = 0; i < clusters.size(); i++) {

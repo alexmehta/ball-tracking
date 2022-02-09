@@ -4,7 +4,7 @@ public class Point<K, V> {
     K yCord;
     V xCord;
 
-    //swapped values first is y coord
+    //swapped values {{|}} first is y coordinate
     public Point(K first, V second) {
         this.yCord = first;
         this.xCord = second;
@@ -35,6 +35,7 @@ public class Point<K, V> {
 
     @Override
     public String toString() {
+        //print point
         return xCord + ", " + yCord;
     }
 }
