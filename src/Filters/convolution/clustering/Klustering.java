@@ -4,6 +4,7 @@ import Filters.convolution.FindCenter;
 import Utility.Pair;
 import Utility.Utility;
 
+import java.lang.module.FindException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -73,23 +74,22 @@ public class Klustering {
             assignPoints(targets);
             centerKlusters();
             i++;
-        } while (i!=20);
+        } while (i!=60);
     }
 
 
     private void centerKlusters() {
         for (Kluster cluster : clusters) {
             prev.add(cluster.center);
-            Pair<Integer, Integer> newcenter = getAverage(cluster.pairs);
-            if (newcenter.equals(cluster.center)) done = false;
-            cluster.center = FindCenter.count(cluster.pairs);
+            cluster.center = getAverage(cluster.pairs);
         }
     }
 
     private Pair<Integer, Integer> getAverage(ArrayList<Pair<Integer, Integer>> pairs) {
         Pair<Integer,Integer> avg = new Pair<Integer, Integer>(0,0);
         for (Pair<Integer, Integer> pair: pairs) {
-                   avg.add(pair);
+            avg.setFirst(pair.getFirst()+ avg.getFirst());
+            avg.setSecond(pair.getSecond()+ avg.getSecond());
         }
         avg.setFirst(avg.getFirst()/pairs.size());
         avg.setSecond(avg.getSecond()/pairs.size());
