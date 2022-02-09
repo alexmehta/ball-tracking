@@ -6,6 +6,7 @@ import core.DImage;
 
 import java.util.ArrayList;
 
+//colors each ball
 public class ColorKluster extends Convolution {
     private final static int WHITE = 255;
 

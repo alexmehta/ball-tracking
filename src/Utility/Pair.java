@@ -10,7 +10,7 @@ public class Pair<K, V> {
     }
 
     public static void swap(Pair p) {
-        var temp = p.first;
+        Object temp = p.first;
         p.first = p.second;
         p.second = temp;
     }

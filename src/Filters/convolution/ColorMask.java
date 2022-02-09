@@ -5,9 +5,6 @@ import core.DImage;
 public class ColorMask extends Convolution {
     private final int BLACK = 0;
     private final int WHITE = 255;
-    private final int red = 255;
-    private final int green = 0;
-    private final int blue = 0;
     private double THRESHOLD = 200;
     public ColorMask() {
    }
