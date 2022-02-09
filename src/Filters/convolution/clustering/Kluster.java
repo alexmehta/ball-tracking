@@ -1,14 +1,14 @@
 package Filters.convolution.clustering;
 
-import Utility.Pair;
+import Utility.Point;
 
 import java.util.ArrayList;
 
 public class Kluster {
-    Pair<Integer, Integer> center;
-    ArrayList<Pair<Integer, Integer>> pairs;
+    Point<Integer, Integer> center;
+    ArrayList<Point<Integer, Integer>> pairs;
 
-    public Kluster(Pair<Integer, Integer> center) {
+    public Kluster(Point<Integer, Integer> center) {
         this.center = center;
         this.pairs = new ArrayList<>();
     }
@@ -20,23 +20,23 @@ public class Kluster {
                 '}';
     }
 
-    public Pair<Integer, Integer> getCenter() {
+    public Point<Integer, Integer> getCenter() {
         return center;
     }
 
-    public void setCenter(Pair<Integer, Integer> center) {
+    public void setCenter(Point<Integer, Integer> center) {
         this.center = center;
     }
     //points
-    public ArrayList<Pair<Integer, Integer>> getPairs() {
+    public ArrayList<Point<Integer, Integer>> getPairs() {
         return pairs;
     }
 
-    public void setPairs(ArrayList<Pair<Integer, Integer>> pairs) {
+    public void setPairs(ArrayList<Point<Integer, Integer>> pairs) {
         this.pairs = pairs;
     }
 
-    public void addPoint(Pair<Integer, Integer> loc) {
+    public void addPoint(Point<Integer, Integer> loc) {
         pairs.add(loc);
     }
 

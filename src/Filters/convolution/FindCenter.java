@@ -1,10 +1,9 @@
 package Filters.convolution;
 
-import Utility.Pair;
+import Utility.Point;
 import core.DImage;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FindCenter extends Convolution {
     private static int height;
@@ -14,45 +13,44 @@ public class FindCenter extends Convolution {
     public FindCenter() {
     }
 
-    public static Pair<Integer, Integer> count(DImage img) {
+    public static Point<Integer, Integer> count(DImage img) {
         height = img.getHeight();
         width = img.getWidth();
         short[][] grid = img.getBWPixelGrid();
         int count = 0;
-        img.getBWPixelGrid();
-        Pair<Integer, Integer> pair = new Pair<>(0, 0);
+        Point<Integer, Integer> pair = new Point<>(0, 0);
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (grid[i][j] == 0) {
-                    pair.setSecond(pair.getSecond() + i);
-                    pair.setFirst(pair.getFirst() + j);
+                    pair.setX(pair.getX() + i);
+                    pair.setY(pair.getY() + j);
                     count++;
                 }
 
             }
         }
-        pair.setFirst(pair.getFirst() / count);
-        pair.setSecond(pair.getSecond() / count);
+        pair.setY(pair.getY() / count);
+        pair.setX(pair.getX() / count);
 
         return pair;
     }
 
-    public static Pair<Integer, Integer> count(ArrayList<Pair<Integer, Integer>> points) {
+    public static Point<Integer, Integer> count(ArrayList<Point<Integer, Integer>> points) {
         size = points.size();
         int sumX = 0;
         int sumY = 0;
         //return center use k means cluster
-        Pair<Integer, Integer> avg = new Pair<>(0, 0);
+        Point<Integer, Integer> avg = new Point<>(0, 0);
         for (int i = 0; i < size; i++) {
-            sumX +=points.get(i).getFirst();
-            sumY +=points.get(i).getSecond();
+            sumX +=points.get(i).getY();
+            sumY +=points.get(i).getX();
         }
 
         int xCor = sumX/size;
         int yCor = sumY/size;
 
-        avg.setFirst(xCor);
-        avg.setSecond(yCor);
+        avg.setY(xCor);
+        avg.setX(yCor);
 
         return avg;
 

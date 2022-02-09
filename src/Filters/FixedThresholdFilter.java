@@ -25,7 +25,6 @@ public class FixedThresholdFilter implements PixelFilter, Interactive {
                 }
             }
         }
-
         img.setPixels(grid);
         return img;
     }
