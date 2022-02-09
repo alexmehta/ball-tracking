@@ -36,4 +36,9 @@ public class Pair<K, V> {
     public String toString() {
         return second + ", " + first;
     }
+
+    public void add(Pair<K, V> pair) {
+        this.setFirst(pair.getFirst());
+        this.setSecond(pair.getSecond());
+    }
 }

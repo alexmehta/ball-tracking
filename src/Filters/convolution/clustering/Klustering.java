@@ -67,21 +67,33 @@ public class Klustering {
     }
 
     public void kluster() {
+        int i = 0;
         do {
             clearClusters();
             assignPoints(targets);
             centerKlusters();
-        } while (!done);
+            i++;
+        } while (i!=20);
     }
 
 
     private void centerKlusters() {
         for (Kluster cluster : clusters) {
             prev.add(cluster.center);
-            Pair<Integer, Integer> newcenter = FindCenter.count(cluster.pairs);
+            Pair<Integer, Integer> newcenter = getAverage(cluster.pairs);
             if (newcenter.equals(cluster.center)) done = false;
             cluster.center = FindCenter.count(cluster.pairs);
         }
+    }
+
+    private Pair<Integer, Integer> getAverage(ArrayList<Pair<Integer, Integer>> pairs) {
+        Pair<Integer,Integer> avg = new Pair<Integer, Integer>(0,0);
+        for (Pair<Integer, Integer> pair: pairs) {
+                   avg.add(pair);
+        }
+        avg.setFirst(avg.getFirst()/pairs.size());
+        avg.setSecond(avg.getSecond()/pairs.size());
+        return avg;
     }
 
     private void assignPoints(ArrayList<Pair<Integer, Integer>> targets) {
