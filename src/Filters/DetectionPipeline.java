@@ -1,21 +1,27 @@
 package Filters;
 
-import Filters.convolution.*;
+import Filters.convolution.ColorMask;
+import Filters.convolution.Convolution;
+import Filters.convolution.FindCenter;
 import Filters.convolution.clustering.ClusterDebug;
+import Filters.convolution.clustering.Kluster;
 import Filters.convolution.clustering.Klustering;
+import Interfaces.Drawable;
 import Interfaces.Interactive;
 import Interfaces.PixelFilter;
 import Utility.Pair;
 import Utility.Serializer;
 import core.DImage;
+import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-public class DetectionPipeline implements PixelFilter, Interactive {
+public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
 
     private static final int PRINTSIZE = 100;
     ArrayList<Convolution> filters;
     ArrayList<Pair<Integer, Integer>> pairs = new ArrayList<>();
+    ArrayList<Kluster> center = new ArrayList<>();
 
     public DetectionPipeline() {
         filters = new ArrayList<>();
@@ -27,12 +33,14 @@ public class DetectionPipeline implements PixelFilter, Interactive {
 
     @Override
     public DImage processImage(DImage img) throws Exception {
+        center.clear();
         img = applyFilters(img);
         pairs.add(FindCenter.count(img));
         Klustering k = new Klustering(3, img.getBWPixelGrid());
         k.kluster();
         Serializer.printAll(k.getClusters());
         System.err.println(k.getClusters());
+        center.addAll(k.getClusters());
         ClusterDebug c = new ClusterDebug(k.getClusters());
         img = c.processImage(img);
         return img;
@@ -48,6 +56,7 @@ public class DetectionPipeline implements PixelFilter, Interactive {
         }
         return img;
     }
+
     @Override
     public void mouseClicked(int mouseX, int mouseY, DImage img) {
         short[][] pixels = img.getBWPixelGrid();
@@ -61,10 +70,18 @@ public class DetectionPipeline implements PixelFilter, Interactive {
         if (key == '+') {
             c.setTHRESHOLD(c.getTHRESHOLD() + 10);
         } else if (key == '-') {
-
             c.setTHRESHOLD(c.getTHRESHOLD() - 10);
         }
         System.out.println("new threshold is: " + c.getTHRESHOLD());
+    }
+
+    @Override
+    public void drawOverlay(PApplet window, DImage original, DImage filtered) {
+        for (Kluster kluster : center) {
+            Pair center = kluster.getCenter();
+            window.fill(window.color(0, 0, 0));
+            window.ellipse( Float.parseFloat(center.getSecond().toString()),  Float.parseFloat(center.getFirst().toString()), 30, 30);
+        }
 
     }
 }
