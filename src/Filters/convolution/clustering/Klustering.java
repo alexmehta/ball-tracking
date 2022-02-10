@@ -13,7 +13,7 @@ public class Klustering {
     int kP;
     ArrayList<Kluster> clusters;
     ArrayList<Pair<Integer, Integer>> targets;
-    ArrayList<Pair<Integer, Integer>> prev = new ArrayList<Pair<Integer, Integer>>();
+    ArrayList<Pair<Integer, Integer>> prev = new ArrayList<>();
     boolean done = true;
 
     public Klustering(int kP, short[][] image) {
@@ -26,22 +26,21 @@ public class Klustering {
         for (int i = 0; i < kP; i++) {
             clusters.add(new Kluster(locations.poll()));
         }
-        targets = getWhites(image);
     }
 
     public ArrayList<Kluster> getClusters() {
         return clusters;
     }
 
-
     public void kluster() {
-        int i = 0;
-        do {
+        clearClusters();
+        assignPoints(targets);
+        centerKlusters();
+        for (int j = 0; j < 25; j++) {
             clearClusters();
             assignPoints(targets);
             centerKlusters();
-            i++;
-        } while (i != 20);
+        }
     }
 
 
