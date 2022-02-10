@@ -14,7 +14,8 @@ public class Klustering {
     ArrayList<Kluster> clusters;
     ArrayList<Pair<Integer, Integer>> targets;
     ArrayList<Pair<Integer, Integer>> prev = new ArrayList<>();
-    boolean done = true;
+    boolean notfinished = true;
+    ArrayList<Kluster> oldklusters = new ArrayList<>();
 
     public Klustering(int kP, short[][] image) {
         this.kP = kP;
@@ -33,22 +34,22 @@ public class Klustering {
     }
 
     public void kluster() {
-        clearClusters();
-        assignPoints(targets);
-        centerKlusters();
-        for (int j = 0; j < 25; j++) {
-            clearClusters();
+        while (notfinished) {
+            clearClusterPoints();
             assignPoints(targets);
             centerKlusters();
+            System.err.println(notfinished);
         }
     }
 
-
     private void centerKlusters() {
         for (Kluster cluster : clusters) {
-            prev.add(cluster.center);
             Pair<Integer, Integer> newcenter = getAverage(cluster.pairs);
-            if (newcenter.equals(cluster.center)) done = false;
+            if (newcenter.equals(cluster.center)) {
+                notfinished = false;
+            } else {
+                System.out.println("new center and old center " + newcenter + " , " + cluster.center);
+            }
             cluster.center = FindCenter.count(cluster.pairs);
         }
     }
@@ -78,7 +79,8 @@ public class Klustering {
         }
     }
 
-    private void clearClusters() {
+    private void clearClusterPoints() {
+        oldklusters = new ArrayList<>(clusters);
         for (Kluster cluster : clusters) {
             cluster.clear();
         }

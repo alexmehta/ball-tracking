@@ -1,12 +1,4 @@
-core/
-Interfaces/
-lib/
-src/DImage.java
-src/DisplayWindow.java
-src/Drawable.java
-src/PixelFilter.java
-src/Interactive.java
-src/RunMe.java
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Java template
 # Compiled class file

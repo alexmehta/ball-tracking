@@ -15,6 +15,16 @@ public class Pair<K, V> {
         p.second = temp;
     }
 
+    public boolean equals(Pair<Integer, Integer> o) {
+        return (o.first == this.first && o.second == this.second);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getFirst() != null ? getFirst().hashCode() : 0;
+        result = 31 * result + (getSecond() != null ? getSecond().hashCode() : 0);
+        return result;
+    }
 
     public K getFirst() {
         return first;

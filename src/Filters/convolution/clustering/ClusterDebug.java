@@ -1,11 +1,8 @@
 package Filters.convolution.clustering;
 
 import Filters.convolution.Convolution;
-import Filters.convolution.FindCenter;
 import Utility.Pair;
-import Utility.Serializer;
 import core.DImage;
-import core.DisplayWindow;
 
 import java.util.ArrayList;
 
@@ -19,7 +16,7 @@ public class ClusterDebug extends Convolution{
         this.klusters = klusters;
     }
 
-    private static DImage markCluster(Kluster k, DImage img, int r, int g, int b) {
+    private static void markCluster(Kluster k, DImage img, int r, int g, int b) {
        short [][] gird = img.getBWPixelGrid();
         short[][] red = img.getRedChannel();
         short[][] green = img.getGreenChannel();
@@ -27,7 +24,7 @@ public class ClusterDebug extends Convolution{
 
 
         for (int i = 0; i <k.getPairs().size() ; i++) {
-            Pair p = k.getPairs().get(i);
+            Pair<Integer, Integer> p = k.getPairs().get(i);
             Pair.swap(p);
             if (gird[(int) p.getSecond()][(int) p.getFirst()]==255){
                 red[(int) p.getSecond()][(int)p.getFirst()] = (short) r;
@@ -38,7 +35,6 @@ public class ClusterDebug extends Convolution{
             }
         }
         img.setColorChannels(red,green,blue);
-        return img;
     }
 
 

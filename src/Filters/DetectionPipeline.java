@@ -33,16 +33,18 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
 
     @Override
     public DImage processImage(DImage img) throws Exception {
+        long start = System.currentTimeMillis();
         center.clear();
         img = applyFilters(img);
         pairs.add(FindCenter.count(img));
         Klustering k = new Klustering(3, img.getBWPixelGrid());
         k.kluster();
         Serializer.printAll(k.getClusters());
-        System.err.println(k.getClusters());
+//        System.err.println(k.getClusters());
         center.addAll(k.getClusters());
         ClusterDebug c = new ClusterDebug(k.getClusters());
         img = c.processImage(img);
+        System.err.println("Time taken to process image = " + (System.currentTimeMillis() - start) + "ms");
         return img;
     }
 
@@ -61,7 +63,7 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
     public void mouseClicked(int mouseX, int mouseY, DImage img) {
         short[][] pixels = img.getBWPixelGrid();
         short val = pixels[mouseY][mouseX];
-        System.out.printf("Value at: %d %d is %d%n", mouseX, mouseY, val);
+//        System.out.printf("Value at: %d %d is %d%n", mouseX, mouseY, val);
     }
 
     @Override
@@ -72,7 +74,7 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
         } else if (key == '-') {
             c.setTHRESHOLD(c.getTHRESHOLD() - 10);
         }
-        System.out.println("new threshold is: " + c.getTHRESHOLD());
+//        System.out.println("new threshold is: " + c.getTHRESHOLD());
     }
 
     @Override
@@ -80,7 +82,7 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
         for (Kluster kluster : center) {
             Pair center = kluster.getCenter();
             window.fill(window.color(0, 0, 0));
-            window.ellipse( Float.parseFloat(center.getSecond().toString()),  Float.parseFloat(center.getFirst().toString()), 30, 30);
+            window.ellipse(Float.parseFloat(center.getSecond().toString()), Float.parseFloat(center.getFirst().toString()), 30, 30);
         }
 
     }

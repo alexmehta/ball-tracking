@@ -15,9 +15,7 @@ public class Kluster {
 
     @Override
     public String toString() {
-        return "Kluster{" +
-                "center=" + center +
-                '}';
+        return "Kluster{" + "center=" + center + '}';
     }
 
     public Pair<Integer, Integer> getCenter() {
@@ -27,6 +25,7 @@ public class Kluster {
     public void setCenter(Pair<Integer, Integer> center) {
         this.center = center;
     }
+
     //points
     public ArrayList<Pair<Integer, Integer>> getPairs() {
         return pairs;
