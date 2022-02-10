@@ -4,8 +4,10 @@ import Filters.convolution.FindCenter;
 import Utility.Pair;
 import Utility.Utility;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Queue;
 
 public class Klustering {
     int kP;
@@ -18,53 +20,19 @@ public class Klustering {
         this.kP = kP;
         clusters = new ArrayList<>();
         targets = getWhites(image);
+        Collections.shuffle(targets);
+        Queue<Pair<Integer, Integer>> locations = new ArrayDeque<Pair<Integer, Integer>>(targets);
+        if (locations.size() == 0) return;
         for (int i = 0; i < kP; i++) {
-            if (targets.size()==0) break;
-            Collections.shuffle(targets);
-            clusters.add(new Kluster(targets.get(0)));
-            targets.remove(0);
+            clusters.add(new Kluster(locations.poll()));
         }
         targets = getWhites(image);
-    }
-
-    public int getkP() {return kP;
-    }
-
-    public void setkP(int kP) {
-        this.kP = kP;
     }
 
     public ArrayList<Kluster> getClusters() {
         return clusters;
     }
 
-    public void setClusters(ArrayList<Kluster> clusters) {
-        this.clusters = clusters;
-    }
-
-    public ArrayList<Pair<Integer, Integer>> getTargets() {
-        return targets;
-    }
-
-    public void setTargets(ArrayList<Pair<Integer, Integer>> targets) {
-        this.targets = targets;
-    }
-
-    public ArrayList<Pair<Integer, Integer>> getPrev() {
-        return prev;
-    }
-
-    public void setPrev(ArrayList<Pair<Integer, Integer>> prev) {
-        this.prev = prev;
-    }
-
-    public boolean isDone() {
-        return done;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
-    }
 
     public void kluster() {
         int i = 0;
@@ -73,7 +41,7 @@ public class Klustering {
             assignPoints(targets);
             centerKlusters();
             i++;
-        } while (i!=20);
+        } while (i != 20);
     }
 
 
@@ -87,12 +55,12 @@ public class Klustering {
     }
 
     private Pair<Integer, Integer> getAverage(ArrayList<Pair<Integer, Integer>> pairs) {
-        Pair<Integer,Integer> avg = new Pair<Integer, Integer>(0,0);
-        for (Pair<Integer, Integer> pair: pairs) {
-                   avg.add(pair);
+        Pair<Integer, Integer> avg = new Pair<Integer, Integer>(0, 0);
+        for (Pair<Integer, Integer> pair : pairs) {
+            avg.add(pair);
         }
-        avg.setFirst(avg.getFirst()/pairs.size());
-        avg.setSecond(avg.getSecond()/pairs.size());
+        avg.setFirst(avg.getFirst() / pairs.size());
+        avg.setSecond(avg.getSecond() / pairs.size());
         return avg;
     }
 
