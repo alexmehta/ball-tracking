@@ -1,4 +1,4 @@
-package Filters.convolution.clustering;
+package Filters.clustering;
 
 import Filters.convolution.Convolution;
 import Utility.Pair;

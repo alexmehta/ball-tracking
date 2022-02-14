@@ -2,9 +2,9 @@ package Filters;
 
 import Filters.convolution.ColorMask;
 import Filters.convolution.Convolution;
-import Filters.convolution.clustering.ClusterDebug;
-import Filters.convolution.clustering.Kluster;
-import Filters.convolution.clustering.Klustering;
+import Filters.clustering.ClusterDebug;
+import Filters.clustering.Kluster;
+import Filters.clustering.Klustering;
 import Interfaces.Drawable;
 import Interfaces.Interactive;
 import Interfaces.PixelFilter;

@@ -1,6 +1,6 @@
 package Utility;
 
-import Filters.convolution.clustering.Kluster;
+import Filters.clustering.Kluster;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
