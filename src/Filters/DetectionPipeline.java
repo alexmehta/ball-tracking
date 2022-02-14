@@ -15,8 +15,10 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-import static Filters.convolution.clustering.Klustering.count;
-
+/**
+ * Runs Filter Classes
+ * <p>Runs Filters and Klusters</p>
+ **/
 public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
 
     private static final int PRINTSIZE = 100;
@@ -26,20 +28,16 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
     public DetectionPipeline() {
         filters = new ArrayList<>();
         filters.add(new ColorMask());
-//        filters.add(new sevenxsevenGaussianBlur());
-//        filters.add(new BoxBlur(15));
-//        filters.add(new Sobel());
     }
 
     @Override
-    public DImage processImage(DImage img) throws Exception {
+    public DImage processImage(DImage img) {
         long start = System.currentTimeMillis();
-        center.clear();
         img = applyFilters(img);
         Klustering k = new Klustering(3, img.getBWPixelGrid());
         k.kluster();
         Serializer.printAll(k.getClusters());
-        center.addAll(k.getClusters());
+        center = new ArrayList<>(k.getClusters());
         ClusterDebug c = new ClusterDebug(k.getClusters());
         img = c.processImage(img);
         System.err.println("Time taken to process image = " + (System.currentTimeMillis() - start) + "ms");

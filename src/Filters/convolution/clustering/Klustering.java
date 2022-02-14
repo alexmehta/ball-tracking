@@ -38,18 +38,14 @@ public class Klustering {
     }
 
     public void kluster() {
-        int i = 0;
         initClusters();//create empty clusters wtih random centers
         targets = getWhites(img);
         do {
-//            oldklusters = clone(clusters);
             clearClusterPoints();
             System.out.println(clusters);
             assignPoints(targets);
             centerKlusters();
-            i++;
         } while (notfinished);
-        System.out.println(i);
     }
 
     private void initClusters() {
@@ -61,14 +57,6 @@ public class Klustering {
         for (int i = 0; i < kP; i++) {
             clusters.add(new Kluster(locations.poll()));
         }
-    }
-
-    private ArrayList<Kluster> clone(ArrayList<Kluster> clusters) {
-        ArrayList<Kluster> c = new ArrayList<>();
-        for (Kluster cluster : clusters) {
-            c.add(new Kluster(new Pair<>(cluster.center.getFirst(), cluster.center.getSecond())));
-        }
-        return c;
     }
 
     private void centerKlusters() {
