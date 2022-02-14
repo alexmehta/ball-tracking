@@ -1,9 +1,9 @@
 package Filters;
 
 
-import core.DImage;
 import Interfaces.Drawable;
 import Interfaces.PixelFilter;
+import core.DImage;
 import processing.core.PApplet;
 
 public class DrawingFilter implements PixelFilter, Drawable {
@@ -13,11 +13,8 @@ public class DrawingFilter implements PixelFilter, Drawable {
         // we don't change the input image at all!
         return img;
     }
-
-
     @Override
     public void drawOverlay(PApplet window, DImage original, DImage filtered) {
-
     }
 }
 

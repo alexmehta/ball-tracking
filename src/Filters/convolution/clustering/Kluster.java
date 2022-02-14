@@ -14,8 +14,24 @@ public class Kluster {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Kluster)) return false;
+        Kluster kluster = (Kluster) o;
+        return getCenter().equals(kluster.getCenter());
+    }
+
+    @Override
+    public int hashCode() {
+        return getCenter().hashCode();
+    }
+
+    @Override
     public String toString() {
-        return "Kluster{" + "center=" + center + '}';
+        return "Kluster{" +
+                "center=" + center +
+                ", pairs=" + pairs +
+                '}';
     }
 
     public Pair<Integer, Integer> getCenter() {
@@ -39,7 +55,7 @@ public class Kluster {
         pairs.add(loc);
     }
 
-    public void clear() {
+    public void empty() {
         pairs.clear();
     }
 }

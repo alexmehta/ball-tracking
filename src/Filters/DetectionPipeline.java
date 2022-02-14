@@ -2,7 +2,6 @@ package Filters;
 
 import Filters.convolution.ColorMask;
 import Filters.convolution.Convolution;
-import Filters.convolution.FindCenter;
 import Filters.convolution.clustering.ClusterDebug;
 import Filters.convolution.clustering.Kluster;
 import Filters.convolution.clustering.Klustering;
@@ -16,11 +15,12 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
+import static Filters.convolution.clustering.Klustering.count;
+
 public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
 
     private static final int PRINTSIZE = 100;
     ArrayList<Convolution> filters;
-    ArrayList<Pair<Integer, Integer>> pairs = new ArrayList<>();
     ArrayList<Kluster> center = new ArrayList<>();
 
     public DetectionPipeline() {
@@ -36,11 +36,9 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
         long start = System.currentTimeMillis();
         center.clear();
         img = applyFilters(img);
-        pairs.add(FindCenter.count(img));
         Klustering k = new Klustering(3, img.getBWPixelGrid());
         k.kluster();
         Serializer.printAll(k.getClusters());
-//        System.err.println(k.getClusters());
         center.addAll(k.getClusters());
         ClusterDebug c = new ClusterDebug(k.getClusters());
         img = c.processImage(img);
@@ -59,11 +57,9 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
         return img;
     }
 
+
     @Override
     public void mouseClicked(int mouseX, int mouseY, DImage img) {
-        short[][] pixels = img.getBWPixelGrid();
-        short val = pixels[mouseY][mouseX];
-//        System.out.printf("Value at: %d %d is %d%n", mouseX, mouseY, val);
     }
 
     @Override

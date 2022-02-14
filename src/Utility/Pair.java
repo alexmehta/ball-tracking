@@ -47,8 +47,7 @@ public class Pair<K, V> {
         return second + ", " + first;
     }
 
-    public void add(Pair<K, V> pair) {
-        this.setFirst(pair.getFirst());
-        this.setSecond(pair.getSecond());
+    public static Pair<Integer,Integer> add(Pair<Integer,Integer> pair,Pair<Integer,Integer> f) {
+        return new Pair<Integer, Integer>(pair.getFirst()+f.getFirst(),pair.getSecond()+f.getSecond());
     }
 }

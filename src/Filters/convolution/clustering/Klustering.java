@@ -1,6 +1,5 @@
 package Filters.convolution.clustering;
 
-import Filters.convolution.FindCenter;
 import Utility.Pair;
 import Utility.Utility;
 
@@ -13,14 +12,49 @@ public class Klustering {
     int kP;
     ArrayList<Kluster> clusters;
     ArrayList<Pair<Integer, Integer>> targets;
-    ArrayList<Pair<Integer, Integer>> prev = new ArrayList<>();
     boolean notfinished = true;
     ArrayList<Kluster> oldklusters = new ArrayList<>();
+    short[][] img;
 
     public Klustering(int kP, short[][] image) {
         this.kP = kP;
+        this.img = image;
+
+    }
+
+    public static Pair<Integer, Integer> count(ArrayList<Pair<Integer, Integer>> i) {
+        Pair<Integer, Integer> pair = new Pair<>(0, 0);
+        int count = i.size();
+        for (Pair<Integer, Integer> c : i) {
+            pair = Pair.add(c, pair);
+        }
+        pair.setFirst(pair.getFirst() / count);
+        pair.setSecond(pair.getSecond() / count);
+        return pair;
+    }
+
+    public ArrayList<Kluster> getClusters() {
+        return clusters;
+    }
+
+    public void kluster() {
+        int i = 0;
+        initClusters();//create empty clusters wtih random centers
+        targets = getWhites(img);
+        do {
+//            oldklusters = clone(clusters);
+            clearClusterPoints();
+            System.out.println(clusters);
+            assignPoints(targets);
+            centerKlusters();
+            i++;
+        } while (notfinished);
+        System.out.println(i);
+    }
+
+    private void initClusters() {
         clusters = new ArrayList<>();
-        targets = getWhites(image);
+        targets = getWhites(img);
         Collections.shuffle(targets);
         Queue<Pair<Integer, Integer>> locations = new ArrayDeque<Pair<Integer, Integer>>(targets);
         if (locations.size() == 0) return;
@@ -29,35 +63,26 @@ public class Klustering {
         }
     }
 
-    public ArrayList<Kluster> getClusters() {
-        return clusters;
-    }
-
-    public void kluster() {
-        while (notfinished) {
-            clearClusterPoints();
-            assignPoints(targets);
-            centerKlusters();
-            System.err.println(notfinished);
+    private ArrayList<Kluster> clone(ArrayList<Kluster> clusters) {
+        ArrayList<Kluster> c = new ArrayList<>();
+        for (Kluster cluster : clusters) {
+            c.add(new Kluster(new Pair<>(cluster.center.getFirst(), cluster.center.getSecond())));
         }
+        return c;
     }
 
     private void centerKlusters() {
         for (Kluster cluster : clusters) {
             Pair<Integer, Integer> newcenter = getAverage(cluster.pairs);
-            if (newcenter.equals(cluster.center)) {
-                notfinished = false;
-            } else {
-                System.out.println("new center and old center " + newcenter + " , " + cluster.center);
-            }
-            cluster.center = FindCenter.count(cluster.pairs);
+            notfinished = newcenter.getFirst().intValue() != cluster.getCenter().getFirst().intValue() || newcenter.getSecond().intValue() != cluster.getCenter().getSecond().intValue();
+            cluster.center = count(cluster.pairs);
         }
     }
 
     private Pair<Integer, Integer> getAverage(ArrayList<Pair<Integer, Integer>> pairs) {
         Pair<Integer, Integer> avg = new Pair<Integer, Integer>(0, 0);
         for (Pair<Integer, Integer> pair : pairs) {
-            avg.add(pair);
+            avg = Pair.add(pair, avg);
         }
         avg.setFirst(avg.getFirst() / pairs.size());
         avg.setSecond(avg.getSecond() / pairs.size());
@@ -82,9 +107,8 @@ public class Klustering {
     private void clearClusterPoints() {
         oldklusters = new ArrayList<>(clusters);
         for (Kluster cluster : clusters) {
-            cluster.clear();
+            cluster.empty();
         }
-        prev.clear();
     }
 
     private ArrayList<Pair<Integer, Integer>> getWhites(short[][] image) {
