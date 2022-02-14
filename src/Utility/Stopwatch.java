@@ -1,8 +1,7 @@
 package Utility;
 
 public class Stopwatch {
-    long start;
-    private long time;
+    private long start;
 
     public void start() {
         start = System.currentTimeMillis();
