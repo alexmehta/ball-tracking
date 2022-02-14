@@ -43,7 +43,6 @@ public class Klustering {
         targets = getWhites(img);
         do {
             clearClusterPoints();
-            System.out.println(klusters);
             assignPoints(targets);
             centerKlusters();
         } while (notFinished);

@@ -25,7 +25,6 @@ public class Serializer {
     public static void printAll(ArrayList<Kluster> clusters) {
         for (Kluster cluster : clusters) {
             print(cluster.getCenter());
-            System.out.println(cluster.getCenter());
         }
     }
 
