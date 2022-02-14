@@ -38,9 +38,9 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
         img = applyFilters(img);
         Klustering k = new Klustering(3, img.getBWPixelGrid());
         k.kluster();
-        Serializer.printAll(k.getClusters());
-        center = new ArrayList<>(k.getClusters());
-        ClusterDebug c = new ClusterDebug(k.getClusters());
+        Serializer.printAll(k.getKlusters());
+        center = new ArrayList<>(k.getKlusters());
+        ClusterDebug c = new ClusterDebug(k.getKlusters());
         img = c.processImage(img);
         System.out.println(stopwatch.taken() + "ms");
         return img;

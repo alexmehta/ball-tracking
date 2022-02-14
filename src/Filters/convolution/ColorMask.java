@@ -1,13 +1,11 @@
 package Filters.convolution;
 
+import Utility.Utility;
 import core.DImage;
 
 public class ColorMask extends Convolution {
     private final int BLACK = 0;
     private final int WHITE = 255;
-    private final int red = 255;
-    private final int green = 0;
-    private final int blue = 0;
     private double THRESHOLD = 200;
     public ColorMask() {
    }
@@ -20,14 +18,6 @@ public class ColorMask extends Convolution {
         this.THRESHOLD = THRESHOLD;
     }
 
-    public double distanceTo(int r, int g, int b, int otherR, int otherG, int otherB) {
-        double dR = Math.abs(r - otherR) * Math.abs(r - otherR);
-        double dG = Math.abs(g - otherG) * Math.abs(g - otherG);
-        double dB = Math.abs(b - otherB) * Math.abs(b - otherB);
-        return Math.sqrt(dR + dG + dB);
-
-    }
-
     @Override
     public DImage processImage(DImage img) {
         short[][] red = img.getRedChannel();
@@ -35,9 +25,9 @@ public class ColorMask extends Convolution {
         short[][] blue = img.getBlueChannel();
         for (int r = 0; r < red.length; r++) {
             for (int c = 0; c < red[r].length; c++) {
-                boolean isRed = distanceTo(255, 0, 0, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
-                boolean isBlue = distanceTo(0, 0, 255, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
-                boolean isGreen = distanceTo(0, 255, 0, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
+                boolean isRed = Utility.distanceTo(255, 0, 0, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
+                boolean isBlue = Utility.distanceTo(0, 0, 255, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
+                boolean isGreen = Utility.distanceTo(0, 255, 0, red[r][c], green[r][c], blue[r][c]) <= THRESHOLD;
                 if (isRed || isGreen || isBlue) {
                     red[r][c] = WHITE;
                     green[r][c] = WHITE;

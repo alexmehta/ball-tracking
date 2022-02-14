@@ -9,11 +9,12 @@ import java.util.Collections;
 import java.util.Queue;
 
 public class Klustering {
+    //num klusters
     int kP;
-    ArrayList<Kluster> clusters;
+    ArrayList<Kluster> klusters;
     ArrayList<Pair<Integer, Integer>> targets;
-    boolean notfinished = true;
-    ArrayList<Kluster> oldklusters = new ArrayList<>();
+    boolean notFinished = true;
+    ArrayList<Kluster> oldKlusters = new ArrayList<>();
     short[][] img;
 
     public Klustering(int kP, short[][] image) {
@@ -33,8 +34,8 @@ public class Klustering {
         return pair;
     }
 
-    public ArrayList<Kluster> getClusters() {
-        return clusters;
+    public ArrayList<Kluster> getKlusters() {
+        return klusters;
     }
 
     public void kluster() {
@@ -42,36 +43,38 @@ public class Klustering {
         targets = getWhites(img);
         do {
             clearClusterPoints();
-            System.out.println(clusters);
+            System.out.println(klusters);
             assignPoints(targets);
             centerKlusters();
-        } while (notfinished);
+        } while (notFinished);
     }
 
     private void initClusters() {
-        clusters = new ArrayList<>();
+        klusters = new ArrayList<>();
         targets = getWhites(img);
         Collections.shuffle(targets);
         Queue<Pair<Integer, Integer>> locations = new ArrayDeque<Pair<Integer, Integer>>(targets);
         if (locations.size() == 0) return;
         for (int i = 0; i < kP; i++) {
-            clusters.add(new Kluster(locations.poll()));
+            klusters.add(new Kluster(locations.poll()));
         }
     }
 
     private void centerKlusters() {
-        for (Kluster cluster : clusters) {
+        for (Kluster cluster : klusters) {
             Pair<Integer, Integer> newcenter = getAverage(cluster.pairs);
-            notfinished = newcenter.getFirst().intValue() != cluster.getCenter().getFirst().intValue() || newcenter.getSecond().intValue() != cluster.getCenter().getSecond().intValue();
+            notFinished = newcenter.getFirst().intValue() != cluster.getCenter().getFirst().intValue() || newcenter.getSecond().intValue() != cluster.getCenter().getSecond().intValue();
             cluster.center = count(cluster.pairs);
         }
     }
 
     private Pair<Integer, Integer> getAverage(ArrayList<Pair<Integer, Integer>> pairs) {
         Pair<Integer, Integer> avg = new Pair<Integer, Integer>(0, 0);
+
         for (Pair<Integer, Integer> pair : pairs) {
             avg = Pair.add(pair, avg);
         }
+
         avg.setFirst(avg.getFirst() / pairs.size());
         avg.setSecond(avg.getSecond() / pairs.size());
         return avg;
@@ -79,22 +82,22 @@ public class Klustering {
 
     private void assignPoints(ArrayList<Pair<Integer, Integer>> targets) {
         for (Pair<Integer, Integer> target : targets) {
-            double smallest = Double.MAX_VALUE;
-            int smallestidx = -1;
-            for (int i = 0; i < clusters.size(); i++) {
-                double dist = Utility.distanceTo(target.getFirst(), target.getSecond(), 0, clusters.get(i).center.getFirst(), clusters.get(i).center.getSecond(), 0);
-                if (dist < smallest) {
-                    smallestidx = i;
-                    smallest = dist;
+            double smallestDist = Double.MAX_VALUE;
+            int smallestIdx = -1;
+            for (int i = 0; i < klusters.size(); i++) {
+                double dist = Utility.distanceTo(target.getFirst(), target.getSecond(), 0, klusters.get(i).center.getFirst(), klusters.get(i).center.getSecond(), 0);
+                if (dist < smallestDist) {
+                    smallestIdx = i;
+                    smallestDist = dist;
                 }
             }
-            clusters.get(smallestidx).addPoint(target);
+            klusters.get(smallestIdx).addPoint(target);
         }
     }
 
     private void clearClusterPoints() {
-        oldklusters = new ArrayList<>(clusters);
-        for (Kluster cluster : clusters) {
+        oldKlusters = new ArrayList<>(klusters);
+        for (Kluster cluster : klusters) {
             cluster.empty();
         }
     }
