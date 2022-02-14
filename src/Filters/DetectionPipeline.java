@@ -22,7 +22,6 @@ import java.util.ArrayList;
  **/
 public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
 
-    private static final int PRINTSIZE = 100;
     ArrayList<Convolution> filters;
     ArrayList<Kluster> center = new ArrayList<>();
     Stopwatch stopwatch = new Stopwatch();
@@ -47,6 +46,8 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
     }
 
     /**
+     * Iterate through the {@link Convolution} filters and apply them in order
+     *
      * @param img insert a {@link core.DImage}
      **/
     private DImage applyFilters(DImage img) {
