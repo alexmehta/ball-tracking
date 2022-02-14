@@ -9,25 +9,23 @@ import java.util.Collections;
 import java.util.Queue;
 
 public class Klustering {
-    //num klusters
-    int kP;
+    int numOfKlusters;
     ArrayList<Kluster> klusters;
     ArrayList<Pair<Integer, Integer>> targets;
     boolean notFinished = true;
-    ArrayList<Kluster> oldKlusters = new ArrayList<>();
     short[][] img;
 
-    public Klustering(int kP, short[][] image) {
-        this.kP = kP;
+    public Klustering(int numOfKlusters, short[][] image) {
+        this.numOfKlusters = numOfKlusters;
         this.img = image;
 
     }
 
-    public static Pair<Integer, Integer> count(ArrayList<Pair<Integer, Integer>> i) {
+    public static Pair<Integer, Integer> count(ArrayList<Pair<Integer, Integer>> points) {
         Pair<Integer, Integer> pair = new Pair<>(0, 0);
-        int count = i.size();
-        for (Pair<Integer, Integer> c : i) {
-            pair = Pair.add(c, pair);
+        int count = points.size();
+        for (Pair<Integer, Integer> point : points) {
+            pair = Pair.add(point, pair);
         }
         pair.setFirst(pair.getFirst() / count);
         pair.setSecond(pair.getSecond() / count);
@@ -39,7 +37,7 @@ public class Klustering {
     }
 
     public void kluster() {
-        initClusters();//create empty clusters wtih random centers
+        initClusters();//create empty clusters with random centers
         targets = getWhites(img);
         do {
             clearClusterPoints();
@@ -54,20 +52,20 @@ public class Klustering {
         Collections.shuffle(targets);
         Queue<Pair<Integer, Integer>> locations = new ArrayDeque<Pair<Integer, Integer>>(targets);
         if (locations.size() == 0) return;
-        for (int i = 0; i < kP; i++) {
+        for (int i = 0; i < numOfKlusters; i++) {
             klusters.add(new Kluster(locations.poll()));
         }
     }
 
     private void centerKlusters() {
         for (Kluster cluster : klusters) {
-            Pair<Integer, Integer> newcenter = getAverage(cluster.pairs);
-            notFinished = newcenter.getFirst().intValue() != cluster.getCenter().getFirst().intValue() || newcenter.getSecond().intValue() != cluster.getCenter().getSecond().intValue();
+            Pair<Integer, Integer> newCenter = getCenter(cluster.pairs);
+            notFinished = newCenter.getFirst().intValue() != cluster.getCenter().getFirst().intValue() || newCenter.getSecond().intValue() != cluster.getCenter().getSecond().intValue();
             cluster.center = count(cluster.pairs);
         }
     }
 
-    private Pair<Integer, Integer> getAverage(ArrayList<Pair<Integer, Integer>> pairs) {
+    private Pair<Integer, Integer> getCenter(ArrayList<Pair<Integer, Integer>> pairs) {
         Pair<Integer, Integer> avg = new Pair<Integer, Integer>(0, 0);
 
         for (Pair<Integer, Integer> pair : pairs) {
@@ -95,21 +93,20 @@ public class Klustering {
     }
 
     private void clearClusterPoints() {
-        oldKlusters = new ArrayList<>(klusters);
         for (Kluster cluster : klusters) {
             cluster.empty();
         }
     }
 
     private ArrayList<Pair<Integer, Integer>> getWhites(short[][] image) {
-        ArrayList<Pair<Integer, Integer>> c = new ArrayList<>();
+        ArrayList<Pair<Integer, Integer>> whites = new ArrayList<>();
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < image[i].length; j++) {
-                short v = image[i][j];
-                if (v != 255) continue;
-                c.add(new Pair<>(i, j));
+                short pixelColor = image[i][j];
+                if (pixelColor != 255) continue;
+                whites.add(new Pair<>(i, j));
             }
         }
-        return c;
+        return whites;
     }
 }
