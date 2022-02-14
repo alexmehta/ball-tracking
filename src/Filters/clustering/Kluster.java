@@ -13,6 +13,12 @@ public class Kluster {
     Pair<Integer, Integer> center;
     ArrayList<Pair<Integer, Integer>> pairs;
 
+    /**
+     * Takes in a center value that represents the center of the ball.
+     * The constructor also initializes an empty list
+     * @see  Kluster#pairs
+     * @param center is the center of the ball
+     */
     public Kluster(Pair<Integer, Integer> center) {
         this.center = center;
         this.pairs = new ArrayList<>();
@@ -40,18 +46,13 @@ public class Kluster {
         return center;
     }
 
-    public void setCenter(Pair<Integer, Integer> center) {
-        this.center = center;
-    }
+
 
     //points
     public ArrayList<Pair<Integer, Integer>> getPairs() {
         return pairs;
     }
 
-    public void setPairs(ArrayList<Pair<Integer, Integer>> pairs) {
-        this.pairs = pairs;
-    }
 
     public void addPoint(Pair<Integer, Integer> loc) {
         pairs.add(loc);
