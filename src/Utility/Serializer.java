@@ -11,7 +11,10 @@ import java.util.Date;
 
 public class Serializer {
     static PrintWriter fout;
+    //prevent creation of Serializer class, as it is a static class.
+    private Serializer(){
 
+    }
     static {
         try {
             fout = new PrintWriter(new OutputStreamWriter(new FileOutputStream("locations.csv")));
@@ -25,7 +28,6 @@ public class Serializer {
     public static void printAll(ArrayList<Kluster> clusters) {
         for (Kluster cluster : clusters) {
             print(cluster.getCenter());
-            System.out.println(cluster.getCenter());
         }
     }
 
