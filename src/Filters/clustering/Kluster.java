@@ -4,6 +4,11 @@ import Utility.Pair;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a single ball object as a Cluster in a K-means clustering algorithm.
+ *
+ * @see <a href="https://docs.google.com/presentation/d/1Fc8nYHWzw4wxqpDboB07TfbmMfKZ4LtOHLi5LzBO4v4/edit#slide=id.g1126f15ff71_0_0">Slides</a>
+ **/
 public class Kluster {
     Pair<Integer, Integer> center;
     ArrayList<Pair<Integer, Integer>> pairs;
@@ -28,10 +33,7 @@ public class Kluster {
 
     @Override
     public String toString() {
-        return "Kluster{" +
-                "center=" + center +
-                ", pairs=" + pairs +
-                '}';
+        return "Kluster{" + "center=" + center + ", pairs=" + pairs + '}';
     }
 
     public Pair<Integer, Integer> getCenter() {
