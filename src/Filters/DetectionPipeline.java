@@ -32,7 +32,6 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
 
     @Override
     public DImage processImage(DImage img) {
-        long start = System.currentTimeMillis();
         img = applyFilters(img);
         Klustering k = new Klustering(3, img.getBWPixelGrid());
         k.kluster();
@@ -40,7 +39,6 @@ public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
         center = new ArrayList<>(k.getClusters());
         ClusterDebug c = new ClusterDebug(k.getClusters());
         img = c.processImage(img);
-        System.err.println("Time taken to process image = " + (System.currentTimeMillis() - start) + "ms");
         return img;
     }
 
