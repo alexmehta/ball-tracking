@@ -50,7 +50,8 @@ public class Klustering {
         klusters = new ArrayList<>();
         targets = getWhites(img);
         Collections.shuffle(targets);
-        Queue<Pair<Integer, Integer>> locations = new ArrayDeque<Pair<Integer, Integer>>(targets);
+        // Use {@link ArrayDeque} over a linked list because of faster amortized operation speed.
+        Queue<Pair<Integer, Integer>> locations = new ArrayDeque<>(targets);
         if (locations.size() == 0) return;
         for (int i = 0; i < numOfKlusters; i++) {
             klusters.add(new Kluster(locations.poll()));
@@ -67,11 +68,9 @@ public class Klustering {
 
     private Pair<Integer, Integer> getCenter(ArrayList<Pair<Integer, Integer>> pairs) {
         Pair<Integer, Integer> avg = new Pair<Integer, Integer>(0, 0);
-
         for (Pair<Integer, Integer> pair : pairs) {
             avg = Pair.add(pair, avg);
         }
-
         avg.setFirst(avg.getFirst() / pairs.size());
         avg.setSecond(avg.getSecond() / pairs.size());
         return avg;
