@@ -22,7 +22,6 @@ import java.util.ArrayList;
  **/
 public class DetectionPipeline implements PixelFilter, Interactive, Drawable {
 
-    private static final int PRINTSIZE = 100;
     ArrayList<Convolution> filters;
     ArrayList<Kluster> center = new ArrayList<>();
     Stopwatch stopwatch = new Stopwatch();
